@@ -6,8 +6,7 @@ answerDoor = "That is a door"
 answerWall = "That is a wall"
 answerEmpty = "You walked, good job"
 
-def move(direction):
-    global roomValues
+def move(direction, roomValues):
     if direction.lower() == "up":
         if roomValues[1][1] + 1 > roomValues[0][1]:
             print answerWall
@@ -45,8 +44,7 @@ def move(direction):
             else:
                 print answerEmpty
                 
-def useDoor():
-    global roomValues
+def useDoor(roomValues):
     print "You walk through the doorway into a new room."
     roomValues = createRoom(roomValues)
     
@@ -84,3 +82,16 @@ def createRoom(roomValues):
         #If door is on the left
         roomValues[2][0] = 1
         roomValues[2][1] = random.randint(1, roomValues[0][1])
+
+def play():
+    roomValues = [[5,5],[1,1],[3,5]]
+    answerDoor = "That is a door"
+    answerWall = "That is a wall"
+    answerEmpty = "You walked, good job"
+    print "Welcome to the game, enter a direction to start your journey, and enter 'Done' when you are finished"
+    print "To open a door, enter 'Open'"
+    action = input("Direction: ")
+    while action != "Done":
+        move(action, roomValues)
+        if action == "Open":
+            useDoor(roomValues)
